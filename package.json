@@ -1,0 +1,6 @@
+{
+  "homepage": "https://alanr0za.github.io/trad_chinese_learning_app/"
+  "devDependencies": {
+    "gh-pages": "^6.3.0"
+  }
+}
