@@ -1,0 +1,29 @@
+name: hanzi_write_master
+description: A Flutter app scaffold for practicing Chinese character handwriting.
+publish_to: "none"
+version: 0.1.0
+environment:
+  sdk: ">=2.18.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  provider: ^6.0.0
+  # Firebase dependencies removed temporarily to avoid firebase_auth_web compilation
+  # Add these back after configuring Firebase and ensuring compatible versions:
+  # firebase_core: ^2.0.0
+  # cloud_firestore: ^4.0.0
+  # firebase_auth: ^4.0.0
+  # google_sign_in: ^5.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
+  assets:
+    # Include the whole hanzi folder so medians and any future files are bundled for web
+    - assets/hanzi/
+    # Explicit medians file entry to avoid occasional web bundling cache issues
+    - assets/hanzi/medians_graphics.json

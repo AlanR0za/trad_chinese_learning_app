@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Users collection: each document ID must match authenticated uid.
+    match /users/{userId} {
+      allow read: if true; // public leaderboard read
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+
+    // Leaderboard queries are read-only.
+    match /{document=**} {
+      allow read: if true;
+      allow write: if false;
+    }
+  }
+}
