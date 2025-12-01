@@ -131,21 +131,39 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
                   ),
                 ),
                 Expanded(
-                  child: ListView.separated(
+                  child: GridView.builder(
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 4,
+                      childAspectRatio: 1,
+                      mainAxisSpacing: 8,
+                      crossAxisSpacing: 8,
+                    ),
+                    padding: const EdgeInsets.all(8.0),
                     itemCount: _filtered.length,
-                    separatorBuilder: (_, __) => const Divider(height: 1),
                     itemBuilder: (context, index) {
                       final ch = _filtered[index];
-                      final pinyin = _loader.getPinyin(ch).join(', ');
-                      return ListTile(
-                        title: Text(ch, style: const TextStyle(fontSize: 28)),
-                        subtitle: Text(pinyin.isNotEmpty ? pinyin : 'Practicar "$ch"'),
+                      return GestureDetector(
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                             builder: (_) => const PracticeScreen(),
                             settings: RouteSettings(arguments: ch),
                           ));
                         },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Theme.of(context).primaryColor,
+                              width: 2,
+                            ),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: Center(
+                            child: Text(
+                              ch,
+                              style: const TextStyle(fontSize: 64, fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
                       );
                     },
                   ),

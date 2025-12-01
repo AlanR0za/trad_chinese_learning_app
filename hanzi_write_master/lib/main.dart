@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'screens/character_list_screen.dart';
+import 'screens/main_menu_screen.dart';
 
 void main() {
   runApp(const HanziWriteMasterApp());
@@ -24,7 +24,7 @@ class _HanziWriteMasterAppState extends State<HanziWriteMasterApp> {
       theme: ThemeData.light().copyWith(primaryColor: Colors.blue),
       darkTheme: ThemeData.dark(),
       themeMode: _isDark ? ThemeMode.dark : ThemeMode.light,
-      home: CharacterListScreen(onToggleTheme: _toggleTheme, isDark: _isDark),
+      home: MainMenuScreen(onToggleTheme: _toggleTheme, isDark: _isDark),
     );
   }
 }
