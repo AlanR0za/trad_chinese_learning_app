@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
 import '../services/hanzi_loader.dart';
 import '../services/stroke_engine.dart';
 import 'dart:math';
@@ -166,7 +165,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
       body: Column(
         children: [
           Expanded(
-            flex: 2,
+            flex: 3,
             child: Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
