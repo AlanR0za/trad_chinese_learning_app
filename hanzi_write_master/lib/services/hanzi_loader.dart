@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 
 /// HanziLoader: carga datos convertidos de Make Me a Hanzi desde assets.
 ///

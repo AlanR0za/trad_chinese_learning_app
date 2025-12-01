@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hanzi_write_master/services/stroke_engine.dart';
-import 'package:flutter/painting.dart';
 
 void main() {
   test('StrokeEngine returns high score for identical strokes', () {
