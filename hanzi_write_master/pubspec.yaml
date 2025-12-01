@@ -28,3 +28,5 @@ flutter:
     - assets/hanzi/
     # Explicit medians file entry to avoid occasional web bundling cache issues
     - assets/hanzi/medians_graphics.json
+    # Sentence exercises
+    - assets/sentences.json

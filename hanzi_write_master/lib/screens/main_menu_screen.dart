@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'character_list_screen.dart';
 import 'spaced_repetition_screen.dart';
 import 'settings_screen.dart';
+import 'fill_blanks_screen.dart';
 
 class MainMenuScreen extends StatefulWidget {
   final VoidCallback onToggleTheme;
@@ -82,11 +83,14 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
             ),
             const SizedBox(height: 20),
             _MenuButton(
-              label: 'Character Quiz',
+              label: 'Sentence Builder',
               icon: Icons.quiz,
               onPressed: () {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(content: Text('Coming soon...')),
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FillBlanksScreen(),
+                  ),
                 );
               },
             ),
@@ -114,7 +118,7 @@ class _MenuButton extends StatelessWidget {
       width: 200,
       height: 60,
       child: ElevatedButton.icon(
-        icon: Icon(icon, size: 24),
+        icon: Icon(icon, size: 48),
         label: Text(
           label,
           textAlign: TextAlign.center,

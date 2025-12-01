@@ -211,7 +211,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
             ),
           ),
           Expanded(
-            flex: 3,
+            flex: 5,
             child: Padding(
               padding: const EdgeInsets.all(12.0),
               child: Container(
