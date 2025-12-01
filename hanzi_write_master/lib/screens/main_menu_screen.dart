@@ -69,7 +69,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
             ),
             const SizedBox(height: 20),
             _MenuButton(
-              label: 'Vocabulary Builder',
+              label: 'Character Quiz',
               icon: Icons.language,
               onPressed: () {
                 Navigator.push(

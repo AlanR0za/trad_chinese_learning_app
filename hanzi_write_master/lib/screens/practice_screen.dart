@@ -165,7 +165,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
       body: Column(
         children: [
           Expanded(
-            flex: 3,
+            flex: 5,
             child: Center(
               child: Column(
                 mainAxisSize: MainAxisSize.min,
@@ -310,7 +310,7 @@ class _SketchPainterMulti extends CustomPainter {
     final double pressureFactor = 0.06; // how strongly speed reduces radius
     final double minRadius = 2.0; // minimum radius in px
     final double maxRadius = 16.0; // maximum radius in px
-    final double maxGap = 12.0; // densify gap in px
+    final double maxGap = 24.0; // densify gap in px (increased for performance)
 
     // Helper: densify polyline to ensure maxGap
     List<Offset> densifyPts(List<Offset> pts, double gap) {
@@ -374,12 +374,10 @@ class _SketchPainterMulti extends CustomPainter {
         }
         radii[i] = r.clamp(minRadius, maxRadius);
       }
-      // smooth radii to avoid abrupt jumps
-      for (var pass = 0; pass < 3; pass++) {
-        final tmp = List<double>.from(radii);
-        for (var i = 1; i < n - 1; i++) tmp[i] = (radii[i - 1] + radii[i] + radii[i + 1]) / 3.0;
-        for (var i = 1; i < n - 1; i++) radii[i] = tmp[i];
-      }
+              // smooth radii to avoid abrupt jumps (single pass for performance)
+      final tmp = List<double>.from(radii);
+      for (var i = 1; i < n - 1; i++) tmp[i] = (radii[i - 1] + radii[i] + radii[i + 1]) / 3.0;
+      for (var i = 1; i < n - 1; i++) radii[i] = tmp[i];
       return radii;
     }
 
@@ -417,12 +415,11 @@ class _SketchPainterMulti extends CustomPainter {
     }
 
     // 'fill' removed - primaryPaint/softPaint used for rendering
-    // Soft paint for edges (blur) to mimic softer ink edges (subtle)
+    // Soft paint for edges (no blur for Android performance)
     final softPaint = Paint()
-      ..color = Colors.black.withOpacity(0.12)
+      ..color = Colors.black.withOpacity(0.08)
       ..style = PaintingStyle.fill
-      ..isAntiAlias = true
-      ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 1.5);
+      ..isAntiAlias = true;
 
     // Connector/primary paint
     final primaryPaint = Paint()..color = Colors.black..style = PaintingStyle.fill..isAntiAlias = true;
@@ -441,7 +438,7 @@ class _SketchPainterMulti extends CustomPainter {
       }
 
       final dense = densifyPts(s, maxGap);
-      final smooth = catmullRomSpline(dense, 3);
+      final smooth = catmullRomSpline(dense, 1);
       if (smooth.length < 2) {
         canvas.drawCircle(smooth.first, brushMultiplier, primaryPaint);
         continue;
