@@ -263,8 +263,8 @@ class _PracticeScreenState extends State<PracticeScreen> {
                       children: [
                         ElevatedButton(onPressed: _clearCanvas, child: const Text('Repetir')),
                         const SizedBox(width: 8),
-                        ElevatedButton(onPressed: _next, child: const Text('Siguiente')),
-                        const SizedBox(width: 8),
+//                        ElevatedButton(onPressed: _next, child: const Text('Siguiente')),     // commented out button
+//                        const SizedBox(width: 8),
                         ElevatedButton(onPressed: _toggleAnimation, child: Text(_animating ? 'Detener anim' : 'Animar trazos')),
                         const SizedBox(width: 12),
                         Row(
