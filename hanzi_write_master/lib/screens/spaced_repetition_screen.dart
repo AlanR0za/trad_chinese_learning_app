@@ -74,20 +74,35 @@ class _SpacedRepetitionScreenState extends State<SpacedRepetitionScreen> {
   void _respondToCard(int quality) {
     if (_currentCardIndex >= _todayCards.length) return;
 
-    _todayCards[_currentCardIndex].updateCard(quality);
+    final currentCard = _todayCards[_currentCardIndex];
+    currentCard.updateCard(quality);
     
     // Save progress immediately
     SRSCardService.saveCards(_allCards);
 
-    if (_currentCardIndex < _todayCards.length - 1) {
+    // If answered incorrectly (Again or Hard), requeue to back of list
+    if (quality < 3) {
+      // Remove from current position and add to back
+      _todayCards.removeAt(_currentCardIndex);
+      _todayCards.add(currentCard);
+      // Stay at same index (which now has the next card)
       setState(() {
-        _currentCardIndex++;
         _showDefinition = false;
       });
-      _focusNode.requestFocus();
     } else {
-      _showCompletionDialog();
+      // Correct answer - move to next card
+      if (_currentCardIndex < _todayCards.length - 1) {
+        setState(() {
+          _currentCardIndex++;
+          _showDefinition = false;
+        });
+      } else {
+        _showCompletionDialog();
+        return;
+      }
     }
+
+    _focusNode.requestFocus();
   }
 
   void _showCompletionDialog() {
