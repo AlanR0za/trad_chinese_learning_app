@@ -105,12 +105,12 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Seleccionar carácter'),
+        title: const Text('Select a character'),
         actions: [
           IconButton(
             icon: Icon(widget.isDark ? Icons.dark_mode : Icons.light_mode),
             onPressed: widget.onToggleTheme,
-            tooltip: widget.isDark ? 'Cambiar a claro' : 'Cambiar a oscuro',
+            tooltip: widget.isDark ? 'Switch to light mode' : 'Switch to dark mode',
           ),
         ],
       ),
@@ -124,7 +124,7 @@ class _CharacterListScreenState extends State<CharacterListScreen> {
                     controller: _searchCtrl,
                     decoration: const InputDecoration(
                       prefixIcon: Icon(Icons.search),
-                      hintText: 'Buscar por carácter, pinyin o significado',
+                      hintText: 'Search by character, pinyin, or definion...',
                       border: OutlineInputBorder(),
                     ),
                     onChanged: _applyFilter,
