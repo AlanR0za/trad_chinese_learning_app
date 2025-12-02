@@ -1,0 +1,1 @@
+ /home/alan/Desktop/Facu/Sem4/Chinese\ 4/chineseapp/appfolder/trad_chinese_learning_app/hanzi_write_master/build/web/manifest.json:  /home/alan/Desktop/Facu/Sem4/Chinese\ 4/chineseapp/appfolder/trad_chinese_learning_app/hanzi_write_master/web/index.html /home/alan/Desktop/Facu/Sem4/Chinese\ 4/chineseapp/appfolder/trad_chinese_learning_app/hanzi_write_master/web/manifest.json

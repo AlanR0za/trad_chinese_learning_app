@@ -1,0 +1,72 @@
+[
+  {
+    "id": 1,
+    "pinyin": "wǒ xǐhuān chī fàn",
+    "english": "I like to eat rice",
+    "sentence": "我喜歡吃飯",
+    "words": ["我", "喜歡", "吃", "飯"]
+  },
+  {
+    "id": 2,
+    "pinyin": "tā zài xuéxiào dúshū",
+    "english": "He studies at school",
+    "sentence": "他在學校讀書",
+    "words": ["他", "在", "學校", "讀書"]
+  },
+  {
+    "id": 3,
+    "pinyin": "wǒ de péngyou hěn聰慧",
+    "english": "My friend is very smart",
+    "sentence": "我的朋友很聰慧",
+    "words": ["我", "的", "朋友", "很", "聰慧"]
+  },
+  {
+    "id": 4,
+    "pinyin": "nǐ xǐhuān hē chá ma",
+    "english": "Do you like to drink tea?",
+    "sentence": "你喜歡喝茶嗎",
+    "words": ["你", "喜歡", "喝", "茶", "嗎"]
+  },
+  {
+    "id": 5,
+    "pinyin": "wǒmen qùnián qù le zhōngguó",
+    "english": "We went to China last year",
+    "sentence": "我們去年去了中國",
+    "words": ["我們", "去年", "去", "了", "中國"]
+  },
+  {
+    "id": 6,
+    "pinyin": "tā měitiān zǎoshang liù diǎn qǐchuáng",
+    "english": "He gets up at 6 in the morning every day",
+    "sentence": "他每天早上六點起床",
+    "words": ["他", "每天", "早上", "六點", "起床"]
+  },
+  {
+    "id": 7,
+    "pinyin": "wǒ zài gōngsī gōngzuò",
+    "english": "I work at a company",
+    "sentence": "我在公司工作",
+    "words": ["我", "在", "公司", "工作"]
+  },
+  {
+    "id": 8,
+    "pinyin": "tā de jiā zài shànghǎi",
+    "english": "His home is in Shanghai",
+    "sentence": "她的家在上海",
+    "words": ["她", "的", "家", "在", "上海"]
+  },
+  {
+    "id": 9,
+    "pinyin": "wǒmen míngtiān qù dúngōng",
+    "english": "We go camping tomorrow",
+    "sentence": "我們明天去郊遊",
+    "words": ["我們", "明天", "去", "郊遊"]
+  },
+  {
+    "id": 10,
+    "pinyin": "nǐ de lǎoshī zài nǎr",
+    "english": "Where is your teacher?",
+    "sentence": "你的老師在哪裡",
+    "words": ["你", "的", "老師", "在", "哪裡"]
+  }
+]

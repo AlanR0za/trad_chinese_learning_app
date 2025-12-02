@@ -1,6 +1,6 @@
 {
-  "name": "HanziWriteMaster",
-  "short_name": "HanziWrite",
+  "name": "Chineasy",
+  "short_name": "Chineasy",
   "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffffff",
