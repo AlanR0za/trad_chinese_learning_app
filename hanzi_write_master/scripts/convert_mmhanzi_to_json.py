@@ -261,7 +261,7 @@ def parse_dict_file(path: Path) -> dict:
 
 
 def main():
-    p = argparse.ArgumentParser(description='Convert MakeMeAHanzi graphics/dict to JSON for HanziWriteMaster')
+    p = argparse.ArgumentParser(description='Convert MakeMeAHanzi graphics/dict to JSON for Chineasy')
     p.add_argument('--graphics', '-g', type=str, default='graphics.txt', help='Path to graphics.txt')
     p.add_argument('--dict', '-d', type=str, default='dictionary.txt', help='Path to dictionary.txt')
     p.add_argument('--out', '-o', type=str, default='assets/hanzi', help='Output directory for graphics.json and dict.json')

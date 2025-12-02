@@ -2,17 +2,17 @@ import 'package:flutter/material.dart';
 import 'screens/main_menu_screen.dart';
 
 void main() {
-  runApp(const HanziWriteMasterApp());
+  runApp(const ChineasyApp());
 }
 
-class HanziWriteMasterApp extends StatefulWidget {
-  const HanziWriteMasterApp({super.key});
+class ChineasyApp extends StatefulWidget {
+  const ChineasyApp({super.key});
 
   @override
-  State<HanziWriteMasterApp> createState() => _HanziWriteMasterAppState();
+  State<ChineasyApp> createState() => _ChineasyAppState();
 }
 
-class _HanziWriteMasterAppState extends State<HanziWriteMasterApp> {
+class _ChineasyAppState extends State<ChineasyApp> {
   bool _isDark = false;
 
   void _toggleTheme() => setState(() => _isDark = !_isDark);
@@ -20,7 +20,7 @@ class _HanziWriteMasterAppState extends State<HanziWriteMasterApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'HanziWriteMaster',
+      title: 'Chineasy',
       theme: ThemeData.light().copyWith(primaryColor: Colors.blue),
       darkTheme: ThemeData.dark(),
       themeMode: _isDark ? ThemeMode.dark : ThemeMode.light,

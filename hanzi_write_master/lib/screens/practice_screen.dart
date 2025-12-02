@@ -152,6 +152,89 @@ class _PracticeScreenState extends State<PracticeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isPortrait = MediaQuery.of(context).orientation == Orientation.portrait;
+
+    // Header area (character, pinyin, definition, radical)
+    final headerArea = Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(_char, style: const TextStyle(fontSize: 120)),
+          const SizedBox(height: 8),
+          if (_pinyinText != null)
+            Text(
+              _pinyinText!,
+              style: TextStyle(
+                fontSize: 20,
+                color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black54,
+              ),
+            ),
+          if (_definitionText != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 6.0),
+              child: SizedBox(
+                width: 420,
+                child: Text(
+                  _definitionText!,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black54,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
+            ),
+          if (_radicalText != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 6.0),
+              child: Text(
+                'Radical: ${_radicalText!}',
+                style: TextStyle(
+                  fontSize: 15,
+                  color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black45,
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+
+    // Drawing area (extracted to reuse in both orientations)
+    final drawArea = Padding(
+      padding: const EdgeInsets.all(12.0),
+      child: Container(
+        color: Colors.white,
+        child: ClipRect(
+          child: GestureDetector(
+            onPanStart: _onPanStart,
+            onPanUpdate: _onPanUpdate,
+            onPanEnd: (_) => _onPanEnd(),
+            child: Stack(
+              children: [
+                Positioned.fill(
+                  child: CustomPaint(
+                    painter: _SketchPainterMulti(strokes: _strokes, current: _currentStroke, debugMode: false),
+                    size: Size.infinite,
+                  ),
+                ),
+                if (_showMedian && !_animating && _medianDisplay.isNotEmpty && _targetForMedian.isNotEmpty)
+                  Positioned.fill(
+                    child: CustomPaint(
+                      painter: _MedianOverlayPainter(targetStrokes: _targetForMedian, medianStrokes: _medianDisplay, flipVertical: _flipVertical),
+                      size: Size.infinite,
+                    ),
+                  ),
+                if (_animating)
+                  Positioned.fill(
+                    child: TargetStrokeAnimator(character: _char, flipVertical: _flipVertical, showMedian: _showMedian),
+                  ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -164,91 +247,21 @@ class _PracticeScreenState extends State<PracticeScreen> {
       ),
       body: Column(
         children: [
+          // In portrait stack vertically; in landscape put header and drawing side-by-side
           Expanded(
-            flex: 5,
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(_char, style: const TextStyle(fontSize: 120)),
-                  const SizedBox(height: 8),
-                  if (_pinyinText != null)
-                    Text(
-                      _pinyinText!,
-                      style: TextStyle(
-                        fontSize: 20,
-                        color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black54,
-                      ),
-                    ),
-                  if (_definitionText != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 6.0),
-                      child: SizedBox(
-                        width: 420,
-                        child: Text(
-                          _definitionText!,
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black54,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ),
-                  if (_radicalText != null)
-                    Padding(
-                      padding: const EdgeInsets.only(top: 6.0),
-                      child: Text(
-                        'Radical: ${_radicalText!}',
-                        style: TextStyle(
-                          fontSize: 15,
-                          color: Theme.of(context).brightness == Brightness.dark ? Colors.white70 : Colors.black45,
-                        ),
-                      ),
-                    ),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-            flex: 5,
-            child: Padding(
-              padding: const EdgeInsets.all(12.0),
-              child: Container(
-                // Force white background for the drawing area (even in dark mode)
-                color: Colors.white,
-                // Clip the drawing area so painting cannot escape the visible box
-                child: ClipRect(
-                  child: GestureDetector(
-                    onPanStart: _onPanStart,
-                    onPanUpdate: _onPanUpdate,
-                    onPanEnd: (_) => _onPanEnd(),
-                    child: Stack(
-                      children: [
-                        Positioned.fill(
-                          child: CustomPaint(
-                            painter: _SketchPainterMulti(strokes: _strokes, current: _currentStroke, debugMode: false),
-                            size: Size.infinite,
-                          ),
-                        ),
-                        // Draw median overlay only when not animating (animation uses medians itself)
-                        if (_showMedian && !_animating && _medianDisplay.isNotEmpty && _targetForMedian.isNotEmpty)
-                          Positioned.fill(
-                            child: CustomPaint(
-                              painter: _MedianOverlayPainter(targetStrokes: _targetForMedian, medianStrokes: _medianDisplay, flipVertical: _flipVertical),
-                              size: Size.infinite,
-                            ),
-                          ),
-                        if (_animating)
-                          Positioned.fill(
-                            child: TargetStrokeAnimator(character: _char, flipVertical: _flipVertical, showMedian: _showMedian),
-                          ),
-                      ],
-                    ),
+            child: isPortrait
+                ? Column(
+                    children: [
+                      Expanded(flex: 5, child: headerArea),
+                      Expanded(flex: 5, child: drawArea),
+                    ],
+                  )
+                : Row(
+                    children: [
+                      Expanded(flex: 4, child: headerArea),
+                      Expanded(flex: 6, child: drawArea),
+                    ],
                   ),
-                ),
-              ),
-            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -263,20 +276,22 @@ class _PracticeScreenState extends State<PracticeScreen> {
                       children: [
                         ElevatedButton(onPressed: _clearCanvas, child: const Text('Repeat')),
                         const SizedBox(width: 8),
-//                        ElevatedButton(onPressed: _next, child: const Text('Next')),     // commented out button
-//                        const SizedBox(width: 8),
                         ElevatedButton(onPressed: _toggleAnimation, child: Text(_animating ? 'Stop' : 'Stroke order')),
                         const SizedBox(width: 12),
                         Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             const Text('Show median'),
-                              Switch(
-                                value: _showMedian,
-                                onChanged: (v) async {
-                                  setState(() => _showMedian = v);
-                                  if (v) await _updateMedianDisplay();
-                                },
-                              ),
+                            const SizedBox(width: 8),
+                            Switch(
+                              value: _showMedian,
+                              activeColor: Theme.of(context).colorScheme.primary,
+                              onChanged: (v) async {
+                                setState(() => _showMedian = v);
+                                if (v) await _updateMedianDisplay();
+                              },
+                            ),
                           ],
                         ),
                       ],

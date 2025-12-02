@@ -23,7 +23,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('HanziWriteMaster'),
+        title: const Text('Chineasy'),
         centerTitle: true,
         actions: [
           IconButton(
@@ -48,7 +48,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              'Welcome to HanziWriteMaster',
+              'Welcome to Chineasy',
               style: Theme.of(context).textTheme.headlineSmall,
               textAlign: TextAlign.center,
             ),

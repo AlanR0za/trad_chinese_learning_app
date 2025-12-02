@@ -1,6 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
-        android:label="hanzi_write_master"
+        android:label="Chineasy"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

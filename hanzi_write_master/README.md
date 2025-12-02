@@ -1,6 +1,6 @@
-# HanziWriteMaster (Scaffold)
+# Chineasy (Scaffold)
 
-Proyecto scaffold de la aplicación HanziWriteMaster. Este proyecto incluye pantallas base, un motor de comparación de trazos simplificado, assets de ejemplo (Make Me a Hanzi convertidos) y tests.
+Proyecto scaffold de la aplicación Chineasy. Este proyecto incluye pantallas base, un motor de comparación de trazos simplificado, assets de ejemplo (Make Me a Hanzi convertidos) y tests.
 
 ## Estructura
 

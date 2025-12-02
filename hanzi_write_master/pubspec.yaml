@@ -30,3 +30,5 @@ flutter:
     - assets/hanzi/medians_graphics.json
     # Sentence exercises
     - assets/sentences.json
+    # App icon placeholder (place your PNG here to include it in builds)
+    - assets/icon/app_icon.png
