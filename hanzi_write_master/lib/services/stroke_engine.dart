@@ -97,8 +97,8 @@ class StrokeEngine {
   }
 
   double _compareOffsets(List<Offset> userPoints, List<Offset> targOffsets) {
-    final sUser = simplify(userPoints, 2.0);
-    final sTarget = simplify(targOffsets, 1.0);
+    final sUser = simplify(userPoints, 2.1);
+    final sTarget = simplify(targOffsets, 1.05);
     final rUser = resample(sUser, resamplePoints);
     final rTarget = resample(sTarget, resamplePoints);
     final nUser = normalize(rUser);
@@ -117,7 +117,7 @@ class StrokeEngine {
       return pts.map((p) => Offset(center.dx + factor * (p.dx - center.dx), center.dy + factor * (p.dy - center.dy))).toList();
     }
 
-    final shrunk = normalize(resample(simplify(shrinkTarget(targOffsets, 0.5), 1.0), resamplePoints));
+    final shrunk = normalize(resample(simplify(shrinkTarget(targOffsets, 0.5), 1.05), resamplePoints));
     final revTarget = nTarget.reversed.toList();
     final revShrunk = shrunk.reversed.toList();
 
