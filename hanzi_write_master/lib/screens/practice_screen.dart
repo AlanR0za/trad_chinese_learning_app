@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import '../services/hanzi_loader.dart';
 import '../services/stroke_engine.dart';
+import '../services/audio_service.dart';
 import 'dart:math';
 import 'dart:ui';
 
@@ -19,6 +20,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
   List<Offset> _currentStroke = [];
   String _char = '中';
   double _score = 0.0;
+  late final AudioService _audio;
   // Control de animación de trazos objetivo
   bool _animating = false;
   // whether to flip visual/target vertically (keeps visual and matching consistent)
@@ -39,6 +41,7 @@ class _PracticeScreenState extends State<PracticeScreen> {
     if (arg is String) _char = arg;
     // load dict info for this character
     _loadDictInfo();
+    _audio = AudioService();
   }
 
   Future<void> _loadDictInfo() async {
@@ -159,7 +162,28 @@ class _PracticeScreenState extends State<PracticeScreen> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(_char, style: const TextStyle(fontSize: 120)),
+          Row(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              GestureDetector(
+                onTap: () async {
+                  // Play pronunciation when character tapped (prefer the character itself)
+                  final toSpeak = _char;
+                  await _audio.speak(toSpeak);
+                },
+                child: Text(_char, style: const TextStyle(fontSize: 120)),
+              ),
+              const SizedBox(width: 12),
+              IconButton(
+                icon: const Icon(Icons.volume_up),
+                tooltip: 'Play pronunciation',
+                onPressed: () async {
+                  final toSpeak = _char;
+                  await _audio.speak(toSpeak);
+                },
+              ),
+            ],
+          ),
           const SizedBox(height: 8),
           if (_pinyinText != null)
             Text(

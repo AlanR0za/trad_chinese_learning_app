@@ -43,56 +43,48 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
           ),
         ],
       ),
-      body: Center(
+      body: Container(
+        width: double.infinity,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Welcome to Chineasy',
-              style: Theme.of(context).textTheme.headlineSmall,
-              textAlign: TextAlign.center,
-            ),
-            const SizedBox(height: 40),
-            _MenuButton(
-              label: 'Handwriting Practice',
-              icon: Icons.edit,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => CharacterListScreen(
-                      onToggleTheme: widget.onToggleTheme,
-                      isDark: widget.isDark,
+            Text('Welcome to', style: Theme.of(context).textTheme.titleLarge),
+            const SizedBox(height: 4),
+            Text('Chineasy', style: Theme.of(context).textTheme.headlineLarge?.copyWith(fontWeight: FontWeight.bold)),
+            const SizedBox(height: 18),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: MediaQuery.of(context).size.width > 600 ? 3 : 1,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                childAspectRatio: 3.2,
+                children: [
+                  _HomeCard(
+                    label: 'Handwriting Practice',
+                    icon: Icons.edit,
+                    onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => CharacterListScreen(
+                          onToggleTheme: widget.onToggleTheme,
+                          isDark: widget.isDark,
+                        ),
+                      ),
                     ),
                   ),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            _MenuButton(
-              label: 'Character Quiz',
-              icon: Icons.language,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SpacedRepetitionScreen(),
+                  _HomeCard(
+                    label: 'Character Quiz',
+                    icon: Icons.language,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => const SpacedRepetitionScreen())),
                   ),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            _MenuButton(
-              label: 'Sentence Builder',
-              icon: Icons.quiz,
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const FillBlanksScreen(),
+                  _HomeCard(
+                    label: 'Sentence Builder',
+                    icon: Icons.quiz,
+                    onTap: () => Navigator.push(context, MaterialPageRoute(builder: (c) => const FillBlanksScreen())),
                   ),
-                );
-              },
+                ],
+              ),
             ),
           ],
         ),
@@ -101,32 +93,33 @@ class _MainMenuScreenState extends State<MainMenuScreen> {
   }
 }
 
-class _MenuButton extends StatelessWidget {
+class _HomeCard extends StatelessWidget {
   final String label;
   final IconData icon;
-  final VoidCallback onPressed;
-
-  const _MenuButton({
-    required this.label,
-    required this.icon,
-    required this.onPressed,
-  });
+  final VoidCallback onTap;
+  const _HomeCard({required this.label, required this.icon, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 200,
-      height: 60,
-      child: ElevatedButton.icon(
-        icon: Icon(icon, size: 48),
-        label: Text(
-          label,
-          textAlign: TextAlign.center,
-        ),
-        onPressed: onPressed,
-        style: ElevatedButton.styleFrom(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12),
+    return Card(
+      elevation: 4,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(12),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            children: [
+              Container(
+                padding: const EdgeInsets.all(12),
+                decoration: BoxDecoration(color: Theme.of(context).colorScheme.primary.withOpacity(0.12), borderRadius: BorderRadius.circular(8)),
+                child: Icon(icon, size: 32, color: Theme.of(context).colorScheme.primary),
+              ),
+              const SizedBox(width: 16),
+              Expanded(child: Text(label, style: Theme.of(context).textTheme.titleMedium)),
+              const Icon(Icons.chevron_right),
+            ],
           ),
         ),
       ),

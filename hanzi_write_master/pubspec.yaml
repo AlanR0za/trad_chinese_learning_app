@@ -10,6 +10,7 @@ dependencies:
     sdk: flutter
   provider: ^6.0.0
   shared_preferences: ^2.2.0
+  flutter_tts: ^3.5.2
   # Firebase dependencies removed temporarily to avoid firebase_auth_web compilation
   # Add these back after configuring Firebase and ensuring compatible versions:
   # firebase_core: ^2.0.0
